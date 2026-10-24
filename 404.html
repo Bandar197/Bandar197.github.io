@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ديوانية</title>
+<meta name="description" content="ديوانية: منصة بلوت عربية. سجّل، كوّن ربعك، والعب بلوت مع ناس حقيقيين.">
+<meta name="theme-color" content="#06180f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306180f'/%3E%3Cpath d='M12 50h40M16 50V28l16-14 16 14v22M26 50V36h12v14' fill='none' stroke='%23e2bd62' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<a class="sr-only" href="#main">تخطَّ إلى المحتوى</a>
+<div id="app">
+  <header class="topbar" id="topbar" hidden>
+    <a class="brand" href="/" data-link aria-label="ديوانية — الرئيسية">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 54h48M14 54V28l18-16 18 16v26M25 54V38h14v16" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg>
+      <span>ديوانية</span>
+    </a>
+    <div class="grow"></div>
+    <a class="iconbtn" href="/notifications" data-link aria-label="التنبيهات" id="bellBtn">🔔<span class="dot" id="bellDot" hidden></span></a>
+    <a class="iconbtn" href="/settings" data-link aria-label="الإعدادات">⚙️</a>
+    <a href="/me" data-link id="meLink" aria-label="ملفي" class="who"></a>
+  </header>
+  <nav class="bottomnav" id="nav" aria-label="التنقل الرئيسي" hidden>
+    <a href="/" data-link><span class="i" aria-hidden="true">🏠</span><span>الرئيسية</span></a>
+    <a href="/play" data-link><span class="i" aria-hidden="true">🃏</span><span>العب</span></a>
+    <a href="/friends" data-link><span class="i" aria-hidden="true">🤝</span><span>الأصدقاء</span></a>
+    <a href="/leaderboard" data-link><span class="i" aria-hidden="true">🏆</span><span>الترتيب</span></a>
+    <a href="/training" data-link><span class="i" aria-hidden="true">🎓</span><span>التدريب</span></a>
+  </nav>
+  <main class="view" id="main" tabindex="-1"></main>
+</div>
+<div id="toasts" role="status" aria-live="polite"></div>
+<div class="netbar" id="netbar" hidden>انقطع الاتصال بالإنترنت — نحاول نرجع…</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

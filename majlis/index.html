@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>بلوت المجلس</title>
+<meta name="description" content="العب بلوت سعودي أونلاين مع أصحابك أو ضد بوتات ذكية.">
+<meta name="theme-color" content="#082219">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e3a2d'/%3E%3Cpath d='M32 14c-6 9-16 13-16 22a8 8 0 0 0 14 5l-3 9h10l-3-9a8 8 0 0 0 14-5c0-9-10-13-16-22z' fill='%23d9ac52'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- Auth -->
+  <section id="scrAuth" class="screen center" hidden>
+    <div class="authbox">
+      <div class="logo">بلوت المجلس</div>
+      <p class="sub">بلوت سعودي أونلاين. سجّل وادخل والعب مع أصحابك أو ضد البوتات.</p>
+      <div class="fan" id="authFan"></div>
+      <div class="seg wide" id="authTabs"><button data-tab="login" class="on">دخول</button><button data-tab="signup">حساب جديد</button></div>
+      <form id="authForm" class="form" autocomplete="on">
+        <label for="fUser">اسم المستخدم</label>
+        <input class="inp" id="fUser" name="username" autocomplete="username" maxlength="14" required placeholder="مثال: أبو_فهد">
+        <label for="fPass">كلمة المرور</label>
+        <input class="inp" id="fPass" name="password" type="password" autocomplete="current-password" minlength="6" required>
+        <div id="fPass2Wrap" hidden><label for="fPass2">أعد كلمة المرور</label><input class="inp" id="fPass2" type="password" autocomplete="new-password" minlength="6"></div>
+        <p class="err" id="authErr" role="alert"></p>
+        <button class="bbtn main big" id="authGo" type="submit">دخول</button>
+      </form>
+      <button class="link" id="offlineBtn" type="button">جرّب بدون حساب ضد البوتات</button>
+    </div>
+  </section>
+
+  <!-- Lobby -->
+  <section id="scrLobby" class="screen" hidden>
+    <header class="topbar">
+      <div class="brand">بلوت المجلس</div>
+      <div class="me" id="meChip"></div>
+      <button class="tbtn" id="logoutBtn">خروج</button>
+    </header>
+    <div class="lobby">
+      <div class="actions-row">
+        <button class="bbtn main big" id="newTableBtn">طاولة جديدة</button>
+        <button class="bbtn big" id="quickBotBtn">العب ضد البوتات</button>
+        <form class="codejoin" id="codeForm"><input class="inp" id="codeInp" maxlength="10" placeholder="كود الطاولة" dir="ltr" autocomplete="off" aria-label="كود الطاولة"><button class="bbtn" type="submit">ادخل</button></form>
+      </div>
+      <div class="seg wide" id="lobbyTabs"><button data-tab="tables" class="on">الطاولات</button><button data-tab="ranks">الترتيب</button><button data-tab="profile">ملفي</button></div>
+      <div id="tabTables" class="tabpane">
+        <div id="myTables"></div>
+        <div class="list" id="tablesList"></div>
+      </div>
+      <div id="tabRanks" class="tabpane" hidden><div class="tablewrap"><table class="grid" id="ranksTable"></table></div></div>
+      <div id="tabProfile" class="tabpane" hidden></div>
+    </div>
+  </section>
+
+  <!-- Waiting room -->
+  <section id="scrRoom" class="screen" hidden>
+    <header class="topbar">
+      <button class="tbtn" id="roomLeave">اطلع</button>
+      <div class="brand">طاولة <span class="code" id="roomCode"></span></div>
+      <button class="tbtn" id="roomCopy">انسخ رابط الدعوة</button>
+    </header>
+    <div class="room">
+      <p class="muted center-t" id="roomInfo"></p>
+      <div class="wseats" id="roomSeats"></div>
+      <div class="actions-row center-row" id="roomActions"></div>
+      <div class="chatbox inline" id="roomChat"></div>
+    </div>
+  </section>
+
+  <!-- Game -->
+  <section id="scrGame" class="screen game" hidden>
+    <header class="hud">
+      <div class="score" aria-label="النتيجة">
+        <div class="team us"><small>لنا</small><b id="sUs">0</b><div class="bar"><i id="bUs"></i></div></div>
+        <div class="sep"></div>
+        <div class="team them"><small>لهم</small><b id="sThem">0</b><div class="bar"><i id="bThem"></i></div></div>
+      </div>
+      <div id="contract" class="chip">بانتظار التوزيع</div>
+      <div id="abnat" class="abnat"></div>
+      <div class="tools">
+        <button class="tbtn" id="tHint">تلميح</button>
+        <button class="tbtn" id="tLast">آخر أكلة</button>
+        <button class="tbtn" id="tCounter">العداد</button>
+        <button class="tbtn" id="tLog">السجل</button>
+        <button class="tbtn" id="tChat">الدردشة <span class="badge" id="chatBadge" hidden></span></button>
+        <button class="tbtn" id="tRules">القوانين</button>
+        <button class="tbtn" id="tSet">الإعدادات</button>
+        <button class="tbtn" id="tLeave">اطلع</button>
+      </div>
+    </header>
+    <main class="table" id="table">
+      <div class="seat foe" data-v="1"><div class="bubble"></div><div class="avatar"><svg class="ring" viewBox="0 0 50 50"><circle cx="25" cy="25" r="23"/></svg><span></span></div><div class="pname"></div><div class="tags"></div><div class="backs"></div></div>
+      <div class="seat ally" data-v="2"><div class="bubble"></div><div class="avatar"><svg class="ring" viewBox="0 0 50 50"><circle cx="25" cy="25" r="23"/></svg><span></span></div><div class="pname"></div><div class="tags"></div><div class="backs"></div></div>
+      <div class="seat foe" data-v="3"><div class="bubble"></div><div class="avatar"><svg class="ring" viewBox="0 0 50 50"><circle cx="25" cy="25" r="23"/></svg><span></span></div><div class="pname"></div><div class="tags"></div><div class="backs"></div></div>
+      <div class="seat ally" data-v="0"><div class="bubble"></div><div class="avatar"><svg class="ring" viewBox="0 0 50 50"><circle cx="25" cy="25" r="23"/></svg><span></span></div><div class="pname"></div><div class="tags"></div></div>
+      <div id="flip"></div>
+      <div id="trick"></div>
+      <div id="panel" class="panel" hidden></div>
+      <div id="counter" hidden></div>
+      <div id="timer" hidden><i></i></div>
+      <div id="hand" class="hand"></div>
+      <div id="toast" role="status"></div>
+      <aside class="chatbox drawer" id="gameChat" hidden></aside>
+    </main>
+  </section>
+
+  <div id="overlay" class="overlay" hidden><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+  <div id="gtoast" role="status"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
